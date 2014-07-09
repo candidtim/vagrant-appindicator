@@ -1,0 +1,6 @@
+*.pyc
+dist/
+.venv/
+MANIFEST
+coverage/
+.coverage
