@@ -4,3 +4,4 @@ dist/
 MANIFEST
 coverage/
 .coverage
+.idea/
