@@ -5,7 +5,7 @@ Parsers for Vagrant machine-index file
 import os
 import json
 
-import gio
+from gi.repository import Gio as gio
 
 
 __VAGRNAT_HOME_VAR = "VAGRANT_HOME"
@@ -63,9 +63,9 @@ def subscribe(listener):
         if event == gio.FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
             listener(get_machineindex())
 
-    import gio
     machineindex_path = _resolve_machineindex_path()
-    monitor = gio.File(machineindex_path).monitor_file()
+    file_to_monitor = gio.File.new_for_path(machineindex_path)
+    monitor = file_to_monitor.monitor_file(gio.FileMonitorFlags.NONE, None)
     monitor.connect("changed", on_machineindex_change)
     active_monitors.append(monitor)
 

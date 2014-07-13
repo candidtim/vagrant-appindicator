@@ -22,7 +22,7 @@ cover:
 	export PYTHONPATH=src:test; export VAGRANT_HOME=/tmp/.vagrat.d; .venv/bin/nosetests --where=test --with-coverage --cover-branches --cover-package=src --cover-html --cover-html-dir=../coverage
 
 run:
-	export PYTHONPATH=src; python src/vagrantindicator.py
+	export PYTHONPATH=src; python3 src/vagrantindicator.py
 
 sdist: clean
 	python setup.py sdist

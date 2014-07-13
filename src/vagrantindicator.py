@@ -1,8 +1,10 @@
+#!/usr/bin/python3
+
 import os
 
-import appindicator
-import gtk
-import pynotify
+from gi.repository import Gtk as gtk
+from gi.repository import AppIndicator3 as appindicator
+from gi.repository import Notify as notify
 
 import util
 import machineindex
@@ -14,9 +16,9 @@ APPINDICATOR_ID = 'vagrant_appindicator'
 
 class VagrantAppIndicator(object):
     def __init__(self):
-        self.indicator = appindicator.Indicator(
-            APPINDICATOR_ID, util.image_path("icon"), appindicator.CATEGORY_APPLICATION_STATUS)
-        self.indicator.set_status(appindicator.STATUS_ACTIVE)
+        self.indicator = appindicator.Indicator.new(
+            APPINDICATOR_ID, util.image_path("icon"), appindicator.IndicatorCategory.SYSTEM_SERVICES)
+        self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.last_known_machines = None
         # trigger first update manually, and then subscribe to real updates
         self.update(machineindex.get_machineindex())
@@ -38,7 +40,7 @@ class VagrantAppIndicator(object):
 
     def __show_notification(self, title, message):
         """Shows baloon notification with given title and message"""
-        pynotify.Notification("<b>Vagrant - %s</b>" % title, message).show()
+        notify.Notification("<b>Vagrant - %s</b>" % title, message).show()
 
 
     def __notify_about_changes(self, new_machines):
@@ -113,7 +115,7 @@ class VagrantAppIndicator(object):
 
 
 def main():
-    pynotify.init(APPINDICATOR_ID)
+    notify.init(APPINDICATOR_ID)
     indicator = VagrantAppIndicator()
     gtk.main()
 
