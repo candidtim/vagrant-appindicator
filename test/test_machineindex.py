@@ -1,6 +1,7 @@
 import os
+import io
 import unittest
-from StringIO import StringIO
+
 
 import machineindex
 
@@ -13,7 +14,7 @@ SAMPLE_INDEX_FILE = SAMPLE_INDEX_DIR + "/index"
 
 class TestMachineIndex(unittest.TestCase):
     def test_parser(self):
-        sample_string_io = StringIO(MACHINEINDEX_SAMPLE)
+        sample_string_io = io.StringIO(MACHINEINDEX_SAMPLE)
         machines = machineindex._parse_machineindex(sample_string_io)
         self.assertEqual(len(machines), 1)
         machine = machines[0]

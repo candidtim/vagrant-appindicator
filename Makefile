@@ -10,7 +10,7 @@ clean:
 
 venv:
 	rm -rf ./.venv/
-	virtualenv --system-site-packages .venv
+	virtualenv --python=python3 --system-site-packages .venv
 	.venv/bin/pip install nose==1.3.3 coverage==3.7.1
 
 vevn: venv
@@ -25,4 +25,4 @@ run:
 	export PYTHONPATH=src; python3 src/vagrantindicator.py
 
 sdist: clean
-	python setup.py sdist
+	python3 setup.py sdist
