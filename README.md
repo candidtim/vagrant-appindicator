@@ -36,24 +36,26 @@ requests are more than welcome.
 - `Makefile` - provides basic tasks to run tests, run appindicator, etc.
 - `setup.py` - python packaging script
 
-## Running tests
+## Running and testing
+
+**Running tests**
 
     $ make venv  # run only once, or run again to re-create the virtualenv
     $ make tests
 
-## Getting test coverage (reports to ./coverage/)
+**Getting test coverage (reports to ./coverage/)**
 
 	$ make cover
 
-## Creating python source package
+**Creating python source package**
 
     $ make sdist
 
-## Running appindicator without installing it
+**Running appindicator without installing it**
 
     $ make run
 
-## Cleaning up the project directory (remove dist/, \*.pyc, etc.)
+**Cleaning up the project directory (remove dist/, \*.pyc, etc.)**
 
     $ make clean
 
