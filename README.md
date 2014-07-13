@@ -84,3 +84,26 @@ Pull requests are very welcome.
 It is always good to clean up some code. Other than that:
 
 1. Test somehow (how?) Gtk code (main module, menus, etc.) 
+
+
+# Copying
+
+Copyright 2014, [candidtim](https://github.com/candidtim)
+
+This Application Indicator is distributed under 
+[GNU GENERAL PUBLIC LICENSE](http://www.gnu.org/licenses/gpl.html), 
+either version 3 of the License, or (at your option) any later version.
+
+![GPLv3](http://www.gnu.org/graphics/gplv3-88x31.png)
+
+This copyright or licensing doesn't apply to the icons used in the AppIndicator.
+See Attributions below.
+
+# Attributions
+
+Icons used in this AppIndicator were originally distributed under 
+[CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/). Neither
+of the resorces listed below were modified, and they were used as is.
+
+- Main AppIndicator icon: icon made by Picol from [www.flaticon.com](http://www.flaticon.com)
+- Play/Stop icons: icons made by [Freepik](http://www.freepik.com) from [www.flaticon.com](http://www.flaticon.com/free-icon/play-button-arrowhead_27223)
