@@ -14,30 +14,24 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import os
 import io
 import unittest
 
-
 import machineindex
 
-
-MACHINEINDEX_SAMPLE = """{"version":1,"machines":{"abcdef1234567890":{"local_data_path":"/home/user/vagrant/vm1/.vagrant","name":"default","provider":"virtualbox","state":"running","vagrantfile_name":null,"vagrantfile_path":"/home/user/vagrant/vm1","updated_at":null,"extra_data":{"box":{"name":"hashicorp/precise64","provider":"virtualbox","version":"1.1.0"}}}}}"""
-
-SAMPLE_INDEX_DIR = "/tmp/.vagrat.d/data/machine-index"
-SAMPLE_INDEX_FILE = SAMPLE_INDEX_DIR + "/index"
+import samples
 
 
 class TestMachineIndex(unittest.TestCase):
     def test_parser(self):
-        sample_string_io = io.StringIO(MACHINEINDEX_SAMPLE)
+        sample_string_io = io.StringIO(samples.MACHINEINDEX_SAMPLE)
         machines = machineindex._parse_machineindex(sample_string_io)
         self.assertEqual(len(machines), 1)
         machine = machines[0]
-        self.assertEqual(machine.id, "abcdef1234567890")
-        self.assertEqual(machine.state, "running")
-        self.assertEqual(machine.directory, "/home/user/vagrant/vm1")
-        self.assertEqual(machine.name, "default")
+        self.assertEqual(machine.id, samples.SAMPLE_MACHINE_ID)
+        self.assertEqual(machine.state, samples.SAMPLE_MACHINE_STATE)
+        self.assertEqual(machine.directory, samples.SAMPLE_MACHINE_DIRECTORY)
+        self.assertEqual(machine.name, samples.SAMPLE_MACHINE_NAME)
 
 
     def test_diff(self):
@@ -69,13 +63,10 @@ class TestMachineIndex(unittest.TestCase):
         self.assertEqual(changed_machines[0].state, m2_changed.state)
 
 
-    def test_resolve_machineindex(self):        
-        try:
-            self._create_test_index()
+    def test_resolve_machineindex(self):
+        with samples.SampleIndex():
             machineindex_path = machineindex._resolve_machineindex_path()
-            self.assertEqual(machineindex_path, SAMPLE_INDEX_FILE)
-        finally:
-            self._remove_test_index()
+            self.assertEqual(machineindex_path, samples.SAMPLE_INDEX_FILE)
 
 
     def test_resolve_machineindex_failure(self):
@@ -83,35 +74,24 @@ class TestMachineIndex(unittest.TestCase):
 
 
     def test_get_machineindex(self):
-        try:
-            self._create_test_index()
+        with samples.SampleIndex():
             machines = machineindex.get_machineindex()
             self.assertEqual(len(machines), 1)
-        finally:
-            self._remove_test_index()
 
 
-    def test_subscribe(self):        
-        def change_listener(): pass
-        try:
-            self._create_test_index()
+    def test_subscribe(self):
+        new_machines = None
+        def change_listener(machines):
+            nonlocal new_machines
+            new_machines = machines
+
+        with samples.SampleIndex() as sample_index, samples.SampleGtkEnvironment() as gtk_env:
             machineindex.subscribe(change_listener)
-            # that is the extent of this test - cannot 
-            # test the listener itself in any simple way 
-            # as it requires running gtk main loop
-        finally:
-            self._remove_test_index()
-
-
-    def _create_test_index(self):
-        os.makedirs(SAMPLE_INDEX_DIR)
-        with open(SAMPLE_INDEX_FILE, 'w') as sample_index:
-            sample_index.write(MACHINEINDEX_SAMPLE)
-    
-
-    def _remove_test_index(self):
-        os.remove(SAMPLE_INDEX_FILE)
-        os.removedirs(SAMPLE_INDEX_DIR)
+            sample_index.touch()
+            gtk_env.wait_for(lambda: new_machines is not None)
+            self.assertIsNotNone(new_machines)
+            self.assertEqual(new_machines[0].id, samples.SAMPLE_MACHINE_ID)
+            machineindex.unsubscribe_all()
 
 
 if __name__ == "__main__":

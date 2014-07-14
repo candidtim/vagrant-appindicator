@@ -74,6 +74,7 @@ Pull requests are very welcome.
 
 1. Extend to support Docker (and probably VirtualBox?)
 2. Handle more statuses (not only poweroff and running, but also other transit and error statuses)
+3. Get better icons for states (indicate state with colors?)
 
 ## Documentation
 
@@ -85,7 +86,8 @@ Pull requests are very welcome.
 
 It is always good to clean up some code. Other than that:
 
-1. Test somehow (how?) Gtk code (main module, menus, etc.) 
+1. Test (better) UI code
+2. Replace Gio file monitoring with non-Gtk-based techniques?
 
 
 # Copying

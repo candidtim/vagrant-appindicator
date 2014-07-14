@@ -15,8 +15,7 @@
 # You should have received a copy of the GNU General Public License along with Foobar.
 # If not, see <http://www.gnu.org/licenses/>.
 
-
-import os
+import signal
 
 from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
@@ -50,30 +49,35 @@ class VagrantAppIndicator(object):
         self.last_known_machines = machines
 
 
-    def shutdown(self):
+    def _shutdown(self):
+        machineindex.unsubscribe_all()
+
+
+    def quit(self):
+        self._shutdown()
         gtk.main_quit()
 
 
-    def __show_notification(self, title, message):
-        """Shows baloon notification with given title and message"""
+    def _show_notification(self, title, message):
+        """Shows balloon notification with given title and message"""
         notify.Notification("<b>Vagrant - %s</b>" % title, message).show()
 
 
+    def __notify_machine_state_change(self, title, machine):
+        self._show_notification(title, "%s (%s)" % (machine.directory, machine.name))
+
+
     def __notify_about_changes(self, new_machines):
-        """Shows baloon notifications for every change in machines states"""
+        """Shows balloon notifications for every change in machines states"""
         if not self.last_known_machines: return # only possible on first update
 
         diff = machineindex.diff_machineindexes(new_machines, self.last_known_machines)
-
         for new_machine in diff[0]:
-            self.__show_notification("New machine went %s" % new_machine.state, 
-                "%s (%s)" % (new_machine.directory, new_machine.name))
+            self.__notify_machine_state_change("New machine went %s" % new_machine.state, new_machine)
         for removed_machine in diff[1]:
-            self.__show_notification("Machine destroyed", 
-                "%s (%s)" % (removed_machine.directory, removed_machine.name))
+            self.__notify_machine_state_change("Machine destroyed", removed_machine)
         for changed_machine in diff[2]:
-            self.__show_notification("Machine went %s" % changed_machine.state,
-                "%s (%s)" % (changed_machine.directory, changed_machine.name))
+            self.__notify_machine_state_change("Machine went %s" % changed_machine.state, changed_machine)
 
 
     def __update_menu(self, machines):
@@ -85,7 +89,7 @@ class VagrantAppIndicator(object):
             menu.append(item)
 
         item_quit = gtk.MenuItem('Quit')
-        item_quit.connect('activate', quit)
+        item_quit.connect('activate', self.quit)
         menu.append(item_quit)
 
         menu.show_all()
@@ -131,8 +135,9 @@ class VagrantAppIndicator(object):
 
 
 def main():
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     notify.init(APPINDICATOR_ID)
-    indicator = VagrantAppIndicator()
+    VagrantAppIndicator()
     gtk.main()
 
 

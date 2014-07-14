@@ -72,17 +72,25 @@ def diff_machineindexes(new_index, old_index):
         return (new_machines, removed_machines, changed_machines)
 
 
-active_monitors = [] # this is required so as to gtk to not to discard the monitor
+active_monitors = {}
+
 def subscribe(listener):
     def on_machineindex_change(mon, f, o, event):
-        if event == gio.FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+        if event == gio.FileMonitorEvent.CHANGES_DONE_HINT:
             listener(get_machineindex())
 
     machineindex_path = _resolve_machineindex_path()
     file_to_monitor = gio.File.new_for_path(machineindex_path)
     monitor = file_to_monitor.monitor_file(gio.FileMonitorFlags.NONE, None)
-    monitor.connect("changed", on_machineindex_change)
-    active_monitors.append(monitor)
+    handler_id = monitor.connect("changed", on_machineindex_change)
+    active_monitors[handler_id] = monitor
+
+def unsubscribe_all():
+    global active_monitors
+    for handler_id in active_monitors:
+        monitor = active_monitors[handler_id]
+        monitor.disconnect(handler_id)
+    active_monitors = {}
 
 
 # private implementation

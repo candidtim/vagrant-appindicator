@@ -13,16 +13,25 @@
 # You should have received a copy of the GNU General Public License along with Foobar.
 # If not, see <http://www.gnu.org/licenses/>.
 
-
 import unittest
+from unittest import mock
 
-import util
+import vagrantindicator
+import machineindex
+
+import samples
 
 
-class TestUtil(unittest.TestCase):
-    def test_image_path(self):
-        image_path = util.image_path("sample")
-        self.assertTrue(image_path.endswith("img/sample.svg"))
+class TestUi(unittest.TestCase):
+    def test_notifications(self):
+        with samples.SampleIndex() as sample_index, samples.SampleGtkEnvironment() as gtk_env:
+            indicator = vagrantindicator.VagrantAppIndicator()
+            indicator._show_notification = mock.Mock()
+            machineindex.get_machineindex = mock.Mock(return_value=[])
+            sample_index.touch()
+            gtk_env.wait_for(lambda: indicator._show_notification.called)
+            self.assertEqual(indicator._show_notification.call_count, 1)
+            indicator._shutdown()
 
 
 if __name__ == "__main__":

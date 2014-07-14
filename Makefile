@@ -7,6 +7,7 @@ clean:
 	rm -f MANIFEST
 	rm -rf coverage
 	rm -f .coverage
+	rm -rf /tmp/.vagrant.d/data/machine-index
 
 venv:
 	rm -rf ./.venv/
@@ -16,10 +17,10 @@ venv:
 vevn: venv
 
 tests:
-	export PYTHONPATH=src:test; export VAGRANT_HOME=/tmp/.vagrat.d; .venv/bin/nosetests --where=test
+	export PYTHONPATH=src:test; export VAGRANT_HOME=/tmp/.vagrant.d; .venv/bin/nosetests --where=test
 
 cover:
-	export PYTHONPATH=src:test; export VAGRANT_HOME=/tmp/.vagrat.d; .venv/bin/nosetests --where=test --with-coverage --cover-branches --cover-package=src --cover-html --cover-html-dir=../coverage
+	export PYTHONPATH=src:test; export VAGRANT_HOME=/tmp/.vagrant.d; .venv/bin/nosetests --where=test --with-coverage --cover-branches --cover-package=src --cover-html --cover-html-dir=../coverage
 
 run:
 	export PYTHONPATH=src; python3 src/vagrantindicator.py
