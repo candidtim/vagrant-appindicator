@@ -13,26 +13,20 @@
 # You should have received a copy of the GNU General Public License along with Foobar.
 # If not, see <http://www.gnu.org/licenses/>.
 
-import unittest
-from unittest import mock
 
-import vagrantindicator
-import machineindex
+import os
+import sys
 
-import samples
+from pkg_resources import Requirement, resource_filename
 
 
-class TestUi(unittest.TestCase):
-    def test_notifications(self):
-        with samples.SampleIndex() as sample_index, samples.SampleGtkEnvironment() as gtk_env:
-            indicator = vagrantindicator.VagrantAppIndicator()
-            indicator._show_notification = mock.Mock()
-            machineindex.get_machineindex = mock.Mock(return_value=[])
-            sample_index.touch()
-            gtk_env.wait_for(lambda: indicator._show_notification.called)
-            self.assertEqual(indicator._show_notification.call_count, 1)
-            indicator._shutdown()
+IMG_DIR_PATH = os.path.join(os.path.dirname(__file__), "..", "img")
+IS_IN_PACKAGE = os.path.isdir(IMG_DIR_PATH)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def image_path(name):
+    """Returns path to the image file by its name"""
+    if IS_IN_PACKAGE:
+    	return os.path.join(IMG_DIR_PATH, "%s.svg" % name)
+    else:
+    	return resource_filename(Requirement.parse("vagrantappindicator"), "img/%s.svg" % name)

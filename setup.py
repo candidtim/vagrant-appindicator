@@ -16,15 +16,23 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-from distutils.core import setup
+import os
+from setuptools import setup, find_packages
 
-setup(name='vagrantappindicator',
-      version='0.1',
-      description='Vagrant Application Indicator for Ubuntu',
-      url='.',
-      author='.',
-      author_email='.',
-      package_dir = {'': 'src'},
-      py_modules=['poc', 'machineindex'],
-      package_data = {'': ['img/*.png']}
+
+def find_resources(resource_dir):
+    resource_names = os.listdir(resource_dir)
+    resource_paths = [os.path.join(resource_dir, file_name) for file_name in resource_names]
+    return (resource_dir, resource_paths)
+
+
+setup(name="vagrantappindicator",
+      version="0.1",
+      description="Vagrant Application Indicator for Ubuntu",
+      url='https://github.com/candidtim/vagrant-appindicator',
+      author='candidtim',
+      author_email='timcandid@gmail.com',
+      packages=find_packages(exclude=["*.test"]),
+      data_files=[find_resources("img")],
+      scripts= ["bin/vgapplet"]
 )

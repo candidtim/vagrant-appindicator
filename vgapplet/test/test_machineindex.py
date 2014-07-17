@@ -17,9 +17,9 @@
 import io
 import unittest
 
-import machineindex
+from vgapplet import machineindex
 
-import samples
+from . import samples
 
 
 class TestMachineIndex(unittest.TestCase):

@@ -14,9 +14,16 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import os
+import unittest
+
+from vgapplet import util
 
 
-def image_path(name):
-    """Returns path to the image file by its name"""
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "img", "%s.svg" % name))
+class TestUtil(unittest.TestCase):
+    def test_image_path(self):
+        image_path = util.image_path("sample")
+        self.assertTrue(image_path.endswith("img/sample.svg"))
+
+
+if __name__ == "__main__":
+    unittest.main()

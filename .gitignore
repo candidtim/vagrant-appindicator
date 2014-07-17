@@ -1,7 +1,12 @@
-*.pyc
-dist/
-.venv/
-MANIFEST
+__pycache__/
+
 coverage/
 .coverage
+
+.venv/
+
+dist/
+README
+vagrantappindicator.egg-info/
+
 .idea/

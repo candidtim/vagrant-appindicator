@@ -21,9 +21,9 @@ from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
 
-import util
-import machineindex
-import vagrantcontrol
+from . import util
+from . import machineindex
+from . import vagrantcontrol
 
 
 APPINDICATOR_ID = 'vagrant_appindicator'
@@ -89,7 +89,7 @@ class VagrantAppIndicator(object):
             menu.append(item)
 
         item_quit = gtk.MenuItem('Quit')
-        item_quit.connect('activate', self.quit)
+        item_quit.connect('activate', self.on_quit)
         menu.append(item_quit)
 
         menu.show_all()
@@ -128,6 +128,7 @@ class VagrantAppIndicator(object):
         return menu_item
 
     # UI listeners
+    def on_quit(self, _): self.quit()
     def on_open_terminal(self, _, machine): vagrantcontrol.open_terminal(machine)
     def on_start_vm(self, _, machine): vagrantcontrol.start(machine)
     def on_halt_vm(self, _, machine): vagrantcontrol.halt(machine)
