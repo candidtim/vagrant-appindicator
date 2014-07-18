@@ -14,16 +14,20 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import unittest
-
-from vgapplet import util
-
-
-class TestUtil(unittest.TestCase):
-    def test_image_path(self):
-        image_path = util.image_path("sample")
-        self.assertTrue(image_path.endswith("img/sample.svg"))
+import sys
+from os.path import join, dirname, isfile
 
 
-if __name__ == "__main__":
-    unittest.main()
+RESOURCES_DIRECTORY_PATH = "/usr/share/vgapplet"
+
+# when running vgapplet directly from sources - use reosurces from sources as well
+__RELATIVE_RESOURCE_PATH = join(dirname(dirname(__file__)))
+__CURRENT_RESOURCES_PATH = \
+	__RELATIVE_RESOURCE_PATH \
+	if isfile(join(__RELATIVE_RESOURCE_PATH, "bin", "vgapplet")) else \
+	RESOURCES_DIRECTORY_PATH
+
+
+def image_path(name):
+    """Returns path to the image file by its name"""    
+    return join(__CURRENT_RESOURCES_PATH, "img", "%s.svg" % name)

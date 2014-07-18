@@ -1,0 +1,51 @@
+Vagrant Application Indicator for Ubuntu
+========================================
+
+Application Indicator to display *last known* state of Vagrant-managed
+VMs in the notification area (system tray) on Ubuntu Unity and in Gnome.
+
+Main features:
+
+-  displays last known state of VMs
+-  allows opening Terminal in the VM home directory from the indicator
+   menu
+-  allows bringing VMs up, halting them and destroying them via an
+   indicator menu
+
+
+Contributing
+============
+
+See 
+`Vagrant AppIndicator on GitHub <https://github.com/candidtim/vagrant-appindicator>`__
+
+
+Copying
+=======
+
+Copyright 2014, `candidtim <https://github.com/candidtim>`__
+
+This Application Indicator is distributed under `GNU GENERAL PUBLIC
+LICENSE <http://www.gnu.org/licenses/gpl.html>`__, either version 3 of
+the License, or (at your option) any later version.
+
+.. figure:: http://www.gnu.org/graphics/gplv3-88x31.png
+   :alt: GPLv3
+   GPLv3
+
+This copyright or licensing doesn't apply to the icons used in the
+AppIndicator. See Attributions below.
+
+
+Attributions
+============
+
+Icons used in this AppIndicator were originally distributed under `CC BY
+3.0 license <http://creativecommons.org/licenses/by/3.0/>`__. Neither of
+the resorces listed below were modified, and they were used as is.
+
+-  Main AppIndicator icon: icon made by Picol from
+   `www.flaticon.com <http://www.flaticon.com>`__
+-  Play/Stop icons: icons made by `Freepik <http://www.freepik.com>`__
+   from
+   `www.flaticon.com <http://www.flaticon.com/free-icon/play-button-arrowhead_27223>`__

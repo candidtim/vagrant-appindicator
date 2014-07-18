@@ -6,7 +6,7 @@ coverage/
 .venv/
 
 dist/
-README
+MANIFEST
 vagrantappindicator.egg-info/
 
 .idea/

@@ -30,11 +30,14 @@ requests are more than welcome.
 
 ## Project directory layout
 
-- `./img/` - image files used in runtime (icons)
-- `./src/` - appindicator source code (runtime)
-- `./test/` - appindicator tests
+- `bin/` - entry point scripts
+- `img/` - image files used in runtime (icons)
+- `vgapplet/` - root application package (all source code)
+- `**/test/` - test packages
 - `Makefile` - provides basic tasks to run tests, run appindicator, etc.
 - `setup.py` - python packaging script
+- `README` - readme file for distributed pacakge
+- `README.md` - this file
 
 ## Running and testing
 

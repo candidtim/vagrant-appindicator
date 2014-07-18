@@ -5,7 +5,7 @@ clean:
 	rm -rf coverage
 	rm -f .coverage
 	rm -rf dist
-	rm -f README
+	rm -f MANIFEST
 	rm -rf vagrantappindicator.egg-info/
 	rm -rf /tmp/.vagrant.d/data/machine-index
 
@@ -23,10 +23,5 @@ cover:
 run:
 	bin/vgapplet
 
-sdist: clean venv
-	cp README.md README
-	.venv/bin/python setup.py sdist
-	rm -f README
-
-install: clean venv
-	.venv/bin/pip install -e .
+sdist: clean
+	python3 setup.py sdist

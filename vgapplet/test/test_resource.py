@@ -14,19 +14,16 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import os
-import sys
+import unittest
 
-from pkg_resources import Requirement, resource_filename
-
-
-IMG_DIR_PATH = os.path.join(os.path.dirname(__file__), "..", "img")
-IS_IN_PACKAGE = os.path.isdir(IMG_DIR_PATH)
+from vgapplet import resource
 
 
-def image_path(name):
-    """Returns path to the image file by its name"""
-    if IS_IN_PACKAGE:
-    	return os.path.join(IMG_DIR_PATH, "%s.svg" % name)
-    else:
-    	return resource_filename(Requirement.parse("vagrantappindicator"), "img/%s.svg" % name)
+class TestResource(unittest.TestCase):
+    def test_image_path(self):
+        image_path = resource.image_path("sample")
+        self.assertTrue(image_path.endswith("img/sample.svg"))
+
+
+if __name__ == "__main__":
+    unittest.main()

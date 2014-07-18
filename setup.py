@@ -17,13 +17,16 @@
 
 
 import os
-from setuptools import setup, find_packages
+from distutils.core import setup
+
+from vgapplet.resource import RESOURCES_DIRECTORY_PATH
 
 
 def find_resources(resource_dir):
+    target_path = os.path.join(RESOURCES_DIRECTORY_PATH, resource_dir)
     resource_names = os.listdir(resource_dir)
-    resource_paths = [os.path.join(resource_dir, file_name) for file_name in resource_names]
-    return (resource_dir, resource_paths)
+    resource_list = [os.path.join(resource_dir, file_name) for file_name in resource_names]
+    return (target_path, resource_list)
 
 
 setup(name="vagrantappindicator",
@@ -32,7 +35,8 @@ setup(name="vagrantappindicator",
       url='https://github.com/candidtim/vagrant-appindicator',
       author='candidtim',
       author_email='timcandid@gmail.com',
-      packages=find_packages(exclude=["*.test"]),
+      license='GPL',
+      packages=["vgapplet"],
       data_files=[find_resources("img")],
-      scripts= ["bin/vgapplet"]
+      scripts=["bin/vgapplet"]
 )

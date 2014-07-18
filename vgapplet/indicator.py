@@ -21,7 +21,7 @@ from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
 
-from . import util
+from . import resource
 from . import machineindex
 from . import vagrantcontrol
 
@@ -32,7 +32,7 @@ APPINDICATOR_ID = 'vagrant_appindicator'
 class VagrantAppIndicator(object):
     def __init__(self):
         self.indicator = appindicator.Indicator.new(
-            APPINDICATOR_ID, util.image_path("icon"), appindicator.IndicatorCategory.SYSTEM_SERVICES)
+            APPINDICATOR_ID, resource.image_path("icon"), appindicator.IndicatorCategory.SYSTEM_SERVICES)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.last_known_machines = None
         # trigger first update manually, and then subscribe to real updates
@@ -100,7 +100,7 @@ class VagrantAppIndicator(object):
         """Creates menu item for a given VM, with its submenu and relvant actions in it"""
         menu_item = gtk.ImageMenuItem("%s (%s) - %s" % (machine.directory, machine.name, machine.state))
         menu_item_image = gtk.Image()
-        menu_item_image.set_from_file(util.image_path(machine.state)) # TODO: handle all states
+        menu_item_image.set_from_file(resource.image_path(machine.state)) # TODO: handle all states
         menu_item.set_image(menu_item_image)
         menu_item.set_always_show_image(True)
         
