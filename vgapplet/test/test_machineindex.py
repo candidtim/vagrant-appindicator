@@ -80,17 +80,15 @@ class TestMachineIndex(unittest.TestCase):
 
 
     def test_subscribe(self):
-        new_machines = None
+        new_machines = []
         def change_listener(machines):
-            nonlocal new_machines
-            new_machines = machines
+            new_machines.append(machines)
 
         with samples.SampleIndex() as sample_index, samples.SampleGtkEnvironment() as gtk_env:
             machineindex.subscribe(change_listener)
             sample_index.touch()
-            gtk_env.wait_for(lambda: new_machines is not None)
-            self.assertIsNotNone(new_machines)
-            self.assertEqual(new_machines[0].id, samples.SAMPLE_MACHINE_ID)
+            gtk_env.wait_for(lambda: len(new_machines) > 0)
+            self.assertEqual(new_machines[0][0].id, samples.SAMPLE_MACHINE_ID)
             machineindex.unsubscribe_all()
 
 

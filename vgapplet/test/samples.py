@@ -21,7 +21,7 @@ import threading
 from gi.repository import Gtk as gtk
 
 
-MACHINEINDEX_SAMPLE = """
+MACHINEINDEX_SAMPLE = u"""
 {
    "version":1,
    "machines":{

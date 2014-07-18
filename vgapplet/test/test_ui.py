@@ -14,7 +14,7 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-from unittest import mock
+import mock
 
 from vgapplet import indicator
 from vgapplet import machineindex

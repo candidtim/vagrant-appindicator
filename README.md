@@ -12,18 +12,26 @@ Main features:
 
 # Usage
 
+To install Vagrant AppIndicator:
+
+    $ sudo pip install git+https://github.com/candidtim/vagrant-appindicator.git
+
+This will install the indicator directly from the source code on GitHub. "master"
+branch (selected by default by the command above) is guaranteed to have tested and
+working version.
+
 To run Vagrant AppIndicator:
 
-1. Clone the repository
-2. `cd vagrant-appindicator`
-3. `nohup make run &`
+    $ nohup vgapplet &
 
-If you think there might be a better way to run it, I'm with you. I'm not
-even sure if this can count as a *way to run* it, but is the only way currently.
-Ideally, I would like to distribute it as a Debian package via the PPA, 
-install a .desktop file for it to be discoverable in Unity's application 
-search, and start it on user log in. All this is planned, and related pull 
-requests are more than welcome.
+To uninstall Vagrant AppIndicator and all files accompanying it (just in case):
+
+    $ sudo pip uninstall vagrantappindicator
+
+Ideally, in future, I would like to distribute it as a Debian package via the PPA, 
+install a .desktop file for it to be discoverable in Unity's application  search, 
+and start it on user log in. All this is planned, and related pull requests are 
+more than welcome.
 
 
 # Development
@@ -39,6 +47,11 @@ requests are more than welcome.
 - `README` - readme file for distributed pacakge
 - `README.md` - this file
 
+## Python 2 and Python 3
+
+Current indicator implementation runs on both Python 2.7 and Python 3. All 
+tests are as well executed on "both pythons".
+
 ## Running and testing
 
 **Running tests**
@@ -48,7 +61,7 @@ requests are more than welcome.
 
 **Getting test coverage (reports to ./coverage/)**
 
-	$ make cover
+    $ make cover
 
 **Creating python source package**
 
