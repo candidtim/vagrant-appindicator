@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Vagrant Application Indicator
+Comment=View state of all VMs managed by Vagrant and operate them
+Exec=vgapplet
+Icon=/usr/share/vgapplet/img/icon.svg
+Type=Application
+Terminal=false
+Categories=GNOME;GTK;Utility;

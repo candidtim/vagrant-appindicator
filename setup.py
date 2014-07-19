@@ -37,6 +37,8 @@ setup(name="vagrantappindicator",
       author_email='timcandid@gmail.com',
       license='GPL',
       packages=["vgapplet"],
-      data_files=[find_resources("img")],
+      data_files=[
+          ('/usr/share/applications', ['vgapplet.desktop']),
+          find_resources("img")],
       scripts=["bin/vgapplet"]
 )

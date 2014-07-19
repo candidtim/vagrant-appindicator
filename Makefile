@@ -43,3 +43,9 @@ sdist3: clean
 	python3 setup.py sdist
 
 sdist: sdist2 sdist3
+
+install: sdist2
+	pip install dist/vagrantappindicator-*.tar.gz
+
+uninstall:
+	pip uninstall vagrantappindicator

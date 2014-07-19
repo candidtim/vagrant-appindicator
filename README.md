@@ -20,9 +20,9 @@ This will install the indicator directly from the source code on GitHub. "master
 branch (selected by default by the command above) is guaranteed to have tested and
 working version.
 
-To run Vagrant AppIndicator:
-
-    $ nohup vgapplet &
+To run Vagrant AppIndicator, start it from Unity Dash or Gnome Desktop Menu (whichever
+desktop you use). Just in case, you can as well run `vgapplet` from command line, or, 
+`nohup vgapplet &`.
 
 To uninstall Vagrant AppIndicator and all files accompanying it (just in case):
 
