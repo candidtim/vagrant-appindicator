@@ -9,6 +9,7 @@ clean:
 	rm -f MANIFEST
 	rm -rf vagrantappindicator.egg-info/
 	rm -rf /tmp/.vagrant.d/data/machine-index
+	rm -f ~/.vgapplet
 
 venv2:
 	rm -rf ./.venv/
@@ -46,6 +47,7 @@ sdist: sdist2 sdist3
 
 install: sdist2
 	pip install dist/vagrantappindicator-*.tar.gz
+	rm -rf dist
 
 uninstall:
 	pip uninstall vagrantappindicator

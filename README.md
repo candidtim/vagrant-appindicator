@@ -5,8 +5,8 @@ notification area (system tray) on Ubuntu Unity and in Gnome.
 
 Main features:
 
-- displays last known state of VMs
-- shows notifications when machines state changes
+- displays last known ("current") state of VMs
+- optionally, shows notifications when machines state changes
 - allows opening Terminal in the VM home directory from the indicator menu
 - allows bringing VMs up, halting them and destroying them via an indicator menu
 
@@ -87,11 +87,6 @@ tests are as well executed on "both pythons".
 Further possible improvements are in several possible directions, as below.
 Pull requests are very welcome.
 
-## Installation and Distribution
-
-1. Create minimalistic distribution (downloadable python package?)
-2. Ultimately, distribute via PPA
-
 ## Features
 
 1. Extend to support Docker (and probably VirtualBox?)
@@ -100,9 +95,7 @@ Pull requests are very welcome.
 
 ## Documentation
 
-1. Document (better) how to run
-2. Document (better) how to develop 
-3. Create sample screenshot and add to the documentation
+1. Create sample screenshot and add to the documentation
 
 ## Refactorings
 

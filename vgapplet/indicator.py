@@ -21,6 +21,7 @@ from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
 
+from . import config
 from . import resource
 from . import machineindex
 from . import vagrantcontrol
@@ -66,7 +67,8 @@ class VagrantAppIndicator(object):
 
     def _show_notification(self, title, message):
         """Shows balloon notification with given title and message"""
-        notify.Notification.new("<b>Vagrant - %s</b>" % title, message, None).show()
+        if config.show_notifications:
+            notify.Notification.new("<b>Vagrant - %s</b>" % title, message, None).show()
 
 
     def __notify_machine_state_change(self, title, machine):
@@ -93,6 +95,13 @@ class VagrantAppIndicator(object):
         for machine in machines:
             item = self.__create_machine_submenu(machine)
             menu.append(item)
+
+        menu.append(gtk.SeparatorMenuItem("Options"))
+
+        item_show_notifications = \
+            gtk.CheckMenuItem("Show notifications", active = config.show_notifications)
+        item_show_notifications.connect("activate", self.on_show_notifications)
+        menu.append(item_show_notifications)
 
         item_quit = gtk.MenuItem('Quit')
         item_quit.connect('activate', self.on_quit)
@@ -139,6 +148,9 @@ class VagrantAppIndicator(object):
     def on_start_vm(self, _, machine): vagrantcontrol.start(machine)
     def on_halt_vm(self, _, machine): vagrantcontrol.halt(machine)
     def on_destroy_vm(self, _, machine): vagrantcontrol.destroy(machine)
+    def on_show_notifications(self, _):
+        config.show_notifications = not config.show_notifications
+        config.persist()
 
 
 def main():
