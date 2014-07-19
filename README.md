@@ -6,6 +6,7 @@ notification area (system tray) on Ubuntu Unity and in Gnome.
 Main features:
 
 - displays last known state of VMs
+- shows notifications when machines state changes
 - allows opening Terminal in the VM home directory from the indicator menu
 - allows bringing VMs up, halting them and destroying them via an indicator menu
 
@@ -23,16 +24,15 @@ desktop you use).
 
 **Few more details, if you want**
 
-Install process will install the indicator directly from the source code on 
-GitHub. "master" branch (selected by default by the command above) is guaranteed to 
-have tested and working version.
+Install process will install the indicator directly from the source code on GitHub. 
+`pip` basically clones the repo and builds and installs everything locally. One can as
+well do all that manually (why though?) - see below if you're interested.
 
 Just in case, you can as well run Vagrant AppIndicator from command line: use `vgapplet` 
 or, `nohup vgapplet &`.
 
-To uninstall Vagrant AppIndicator and all files accompanying it:
-
-    $ sudo pip uninstall vagrantappindicator
+To uninstall Vagrant AppIndicator and all files accompanying it, run 
+`sudo pip uninstall vagrantappindicator`.
 
 
 # Development
@@ -71,6 +71,11 @@ tests are as well executed on "both pythons".
 **Running appindicator without installing it**
 
     $ make run
+
+**Building and installing/uninstalling locally**
+
+    $ sudo make install
+    $ sudo make uninstall
 
 **Cleaning up the project directory (remove dist/, \*.pyc, etc.)**
 
