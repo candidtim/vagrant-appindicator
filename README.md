@@ -12,26 +12,27 @@ Main features:
 
 # Usage
 
-To install Vagrant AppIndicator:
+**Install**:
 
     $ sudo pip install git+https://github.com/candidtim/vagrant-appindicator.git
 
-This will install the indicator directly from the source code on GitHub. "master"
-branch (selected by default by the command above) is guaranteed to have tested and
-working version.
+**Run**
 
 To run Vagrant AppIndicator, start it from Unity Dash or Gnome Desktop Menu (whichever
-desktop you use). Just in case, you can as well run `vgapplet` from command line, or, 
-`nohup vgapplet &`.
+desktop you use).
 
-To uninstall Vagrant AppIndicator and all files accompanying it (just in case):
+**Few more details, if you want**
+
+Install process will install the indicator directly from the source code on 
+GitHub. "master" branch (selected by default by the command above) is guaranteed to 
+have tested and working version.
+
+Just in case, you can as well run Vagrant AppIndicator from command line: use `vgapplet` 
+or, `nohup vgapplet &`.
+
+To uninstall Vagrant AppIndicator and all files accompanying it:
 
     $ sudo pip uninstall vagrantappindicator
-
-Ideally, in future, I would like to distribute it as a Debian package via the PPA, 
-install a .desktop file for it to be discoverable in Unity's application  search, 
-and start it on user log in. All this is planned, and related pull requests are 
-more than welcome.
 
 
 # Development
