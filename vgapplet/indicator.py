@@ -40,6 +40,21 @@ class VagrantAppIndicator(object):
         machineindex.subscribe(self.update)
 
 
+    def _shutdown(self):
+        machineindex.unsubscribe_all()
+
+
+    def run(self):
+        notify.init(APPINDICATOR_ID)
+        gtk.main()
+
+
+    def quit(self):
+        self._shutdown()
+        notify.uninit()
+        gtk.main_quit()
+
+
     def update(self, machines):
         """Entry point for appindicator update.
         Triggers all UI modifications necessary on updates of machines states
@@ -49,18 +64,9 @@ class VagrantAppIndicator(object):
         self.last_known_machines = machines
 
 
-    def _shutdown(self):
-        machineindex.unsubscribe_all()
-
-
-    def quit(self):
-        self._shutdown()
-        gtk.main_quit()
-
-
     def _show_notification(self, title, message):
         """Shows balloon notification with given title and message"""
-        notify.Notification("<b>Vagrant - %s</b>" % title, message).show()
+        notify.Notification.new("<b>Vagrant - %s</b>" % title, message, None).show()
 
 
     def __notify_machine_state_change(self, title, machine):
@@ -137,9 +143,7 @@ class VagrantAppIndicator(object):
 
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
-    notify.init(APPINDICATOR_ID)
-    VagrantAppIndicator()
-    gtk.main()
+    VagrantAppIndicator().run()
 
 
 if __name__ == "__main__":
