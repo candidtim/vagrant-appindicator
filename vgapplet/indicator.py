@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License along with Foobar.
 # If not, see <http://www.gnu.org/licenses/>.
 
+import sys
 import signal
 
 from gi.repository import Gtk as gtk
@@ -32,13 +33,22 @@ APPINDICATOR_ID = 'vagrant_appindicator'
 
 class VagrantAppIndicator(object):
     def __init__(self):
+        notify.init(APPINDICATOR_ID)
         self.indicator = appindicator.Indicator.new(
             APPINDICATOR_ID, resource.image_path("icon"), appindicator.IndicatorCategory.SYSTEM_SERVICES)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.last_known_machines = None
+
         # trigger first update manually, and then subscribe to real updates
-        self.update(machineindex.get_machineindex())
-        machineindex.subscribe(self.update)
+        try:
+            self.update(machineindex.get_machineindex())
+            machineindex.subscribe(self.update)
+        except machineindex.MachineIndexNotFoundError:
+            notify.Notification.new(
+                "<b>Is Vagrant installed?</b>",
+                "Either Vagrant is not installed, or never ran, or its version is too old (has no public machine index)",
+                None).show()
+            sys.exit(1)
 
 
     def _shutdown(self):
@@ -46,7 +56,6 @@ class VagrantAppIndicator(object):
 
 
     def run(self):
-        notify.init(APPINDICATOR_ID)
         gtk.main()
 
 
@@ -95,6 +104,8 @@ class VagrantAppIndicator(object):
         for machine in machines:
             item = self.__create_machine_submenu(machine)
             menu.append(item)
+        if not machines:
+            menu.append(gtk.MenuItem("No active machines found (all machines destroyed?)"))
 
         menu.append(gtk.SeparatorMenuItem("Options"))
 

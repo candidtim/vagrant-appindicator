@@ -54,6 +54,10 @@ class Machine(object):
         return self.state != other.state
 
 
+class MachineIndexNotFoundError(Exception):
+    pass
+
+
 def get_machineindex():
     machineindex_path = _resolve_machineindex_path()
     with open(machineindex_path, 'r') as machineindex_file:
@@ -99,7 +103,8 @@ def _resolve_machineindex_path():
     vagrant_home = os.getenv(__VAGRNAT_HOME_VAR, "~/.vagrant.d")
     machineindex_path = os.path.expanduser(os.path.join(vagrant_home, __MACHINE_INDEX_PATH))
     if not os.path.isfile(machineindex_path):
-        raise Exception("Vagrant machine index not found. Is Vagrant installed and at least one VM created?")
+        raise MachineIndexNotFoundError(
+            "Vagrant machine index not found. Is Vagrant installed and at least one VM created?")
     return machineindex_path
 
 
