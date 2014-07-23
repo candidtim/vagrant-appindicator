@@ -120,9 +120,6 @@ See Attributions below.
 
 # Attributions
 
-Icons used in this AppIndicator were originally distributed under 
-[CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/). Neither
-of the resorces listed below were modified, and they were used as is.
-
-- Main AppIndicator icon: icon made by Picol from [www.flaticon.com](http://www.flaticon.com)
-- Play/Stop icons: icons made by [Freepik](http://www.freepik.com) from [www.flaticon.com](http://www.flaticon.com/free-icon/play-button-arrowhead_27223)
+Main AppIndicator icon was originally distributed under 
+[CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/). 
+Icon made by Picol from [www.flaticon.com](http://www.flaticon.com)

@@ -16,6 +16,7 @@
 import unittest
 import mock
 
+from vgapplet import ui
 from vgapplet import indicator
 from vgapplet import machineindex
 
@@ -23,6 +24,11 @@ from . import samples
 
 
 class TestUi(unittest.TestCase):
+    def test_luminance(self):
+        self.assertEqual(ui._luminance(0,0,0), 0.0)
+        self.assertEqual(ui._luminance(65000,65000,65000,65000), 1.0)
+        self.assertEqual(ui._luminance(128,128,128), 0.5)
+
     def test_notifications(self):
         with samples.SampleIndex() as sample_index, samples.SampleGtkEnvironment() as gtk_env:
             app_indicator = indicator.VagrantAppIndicator()

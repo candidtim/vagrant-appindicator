@@ -16,6 +16,7 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import os
 import signal
 
 from gi.repository import Gtk as gtk
@@ -23,6 +24,7 @@ from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
 
 from . import config
+from . import ui
 from . import resource
 from . import machineindex
 from . import vagrantcontrol
@@ -35,7 +37,7 @@ class VagrantAppIndicator(object):
     def __init__(self):
         notify.init(APPINDICATOR_ID)
         self.indicator = appindicator.Indicator.new(
-            APPINDICATOR_ID, resource.image_path("icon"), appindicator.IndicatorCategory.SYSTEM_SERVICES)
+            APPINDICATOR_ID, resource.image_path("icon", ui.THEME), appindicator.IndicatorCategory.SYSTEM_SERVICES)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.last_known_machines = None
 
@@ -123,10 +125,13 @@ class VagrantAppIndicator(object):
 
 
     def __create_machine_submenu(self, machine):
-        """Creates menu item for a given VM, with its submenu and relvant actions in it"""
+        """Creates menu item for a given VM, with its submenu and relevant actions in it"""
         menu_item = gtk.ImageMenuItem("%s (%s) - %s" % (machine.directory, machine.name, machine.state))
         menu_item_image = gtk.Image()
-        menu_item_image.set_from_file(resource.image_path(machine.state)) # TODO: handle all states
+        image_file_path = resource.image_path(machine.state, ui.THEME)
+        if not os.path.isfile(image_file_path):
+            image_file_path = resource.image_path("unknown", ui.THEME)
+        menu_item_image.set_from_file(image_file_path)
         menu_item.set_image(menu_item_image)
         menu_item.set_always_show_image(True)
         

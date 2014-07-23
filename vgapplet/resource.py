@@ -14,20 +14,19 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import sys
 from os.path import join, dirname, isfile
 
 
 RESOURCES_DIRECTORY_PATH = "/usr/share/vgapplet"
 
-# when running vgapplet directly from sources - use reosurces from sources as well
+# when running vgapplet directly from sources - use resources from source code
 __RELATIVE_RESOURCE_PATH = join(dirname(dirname(__file__)))
 __CURRENT_RESOURCES_PATH = \
-	__RELATIVE_RESOURCE_PATH \
-	if isfile(join(__RELATIVE_RESOURCE_PATH, "bin", "vgapplet")) else \
-	RESOURCES_DIRECTORY_PATH
+    __RELATIVE_RESOURCE_PATH \
+    if isfile(join(__RELATIVE_RESOURCE_PATH, "bin", "vgapplet")) else \
+    RESOURCES_DIRECTORY_PATH
 
 
-def image_path(name):
-    """Returns path to the image file by its name"""    
-    return join(__CURRENT_RESOURCES_PATH, "img", "%s.svg" % name)
+def image_path(name, theme):
+    """Returns path to the image file by its name"""
+    return join(__CURRENT_RESOURCES_PATH, "img", "%s-%s.svg" % (name, theme))
