@@ -87,22 +87,11 @@ tests are as well executed on "both pythons".
 Further possible improvements are in several possible directions, as below.
 Pull requests are very welcome.
 
-## Features
-
 1. Extend to support Docker (and probably VirtualBox?)
-2. Handle more statuses (not only poweroff and running, but also other transit and error statuses)
-3. Get better icons for states (indicate state with colors?)
-
-## Documentation
-
-1. Create sample screenshot and add to the documentation
-
-## Refactorings
-
-It is always good to clean up some code. Other than that:
-
-1. Test (better) UI code
-2. Replace Gio file monitoring with non-Gtk-based techniques?
+2. Update notification messages (make shorter and clearer; only show last directory name instead of full path?);
+3. Create sample screenshot and add to the documentation
+4. Test (better) UI code
+5. Implement update notifications
 
 
 # Copying
