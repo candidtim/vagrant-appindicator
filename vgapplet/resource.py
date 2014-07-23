@@ -28,5 +28,5 @@ __CURRENT_RESOURCES_PATH = \
 
 
 def image_path(name, theme):
-    """Returns path to the image file by its name"""
-    return join(__CURRENT_RESOURCES_PATH, "img", "%s-%s.svg" % (name, theme))
+    """Returns path to the image file by its name, in given theme library"""
+    return join(__CURRENT_RESOURCES_PATH, "img", theme, "%s.svg" % name)

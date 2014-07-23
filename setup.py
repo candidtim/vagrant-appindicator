@@ -39,6 +39,7 @@ setup(name="vagrantappindicator",
       packages=["vgapplet"],
       data_files=[
           ('/usr/share/applications', ['vgapplet.desktop']),
-          find_resources("img")],
+          find_resources("img/light"),
+          find_resources("img/dark")],
       scripts=["bin/vgapplet"]
 )

@@ -22,7 +22,7 @@ from vgapplet import resource
 class TestResource(unittest.TestCase):
     def test_image_path(self):
         image_path = resource.image_path("sample", "theme")
-        self.assertTrue(image_path.endswith("img/sample-theme.svg"))
+        self.assertTrue(image_path.endswith("img/theme/sample.svg"))
 
 
 if __name__ == "__main__":
