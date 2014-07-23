@@ -1,4 +1,4 @@
-# Vagrant Application Indicator for Ubuntu
+# Vagrant Application Indicator for Ubuntu Unity / Gnome
 
 Application Indicator to display *last known* state of Vagrant-managed VMs in the
 notification area (system tray) on Ubuntu Unity and in Gnome.
@@ -10,6 +10,7 @@ Main features:
 - allows opening Terminal in the VM home directory from the indicator menu
 - allows bringing VMs up, halting them and destroying them via an indicator menu
 
+![alt tag](https://raw.githubusercontent.com/candidtim/vagrant-appindicator/gh-pages/img/vgapplet-screenshot.png)
 
 # Usage
 
@@ -89,9 +90,8 @@ Pull requests are very welcome.
 
 1. Extend to support Docker (and probably VirtualBox?)
 2. Update notification messages (make shorter and clearer; only show last directory name instead of full path?);
-3. Create sample screenshot and add to the documentation
-4. Test (better) UI code
-5. Implement update notifications
+3. Test (better) UI code
+4. Implement update notifications
 
 
 # Copying
