@@ -83,17 +83,6 @@ tests are as well executed on "both pythons".
     $ make clean
 
 
-# Roadmap
-
-Further possible improvements are in several possible directions, as below.
-Pull requests are very welcome.
-
-1. Extend to support Docker (and probably VirtualBox?)
-2. Update notification messages (make shorter and clearer; only show last directory name instead of full path?);
-3. Test (better) UI code
-4. Implement update notifications
-
-
 # Copying
 
 Copyright 2014, [candidtim](https://github.com/candidtim)
