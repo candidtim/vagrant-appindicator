@@ -78,11 +78,20 @@ class VagrantAppIndicator(object):
 
 
     def __update_icon(self, machines):
-        running_count = len([m for m in machines if m.isRunning()])
-        icon_index = min(running_count, 3)
-        icon_name = "icon-%d" % icon_index
+        """Updates main appindicator icon to reflect the number of running machines
+        Icons indicate if no, 1, 2 or 3 machines are running; more running machines
+        are shown same way as 3 running machines"""
+        icon_name = VagrantAppIndicator._icon_name(machines)
         icon = resource.image_path(icon_name, ui.THEME)
         self.indicator.set_icon(icon)
+
+
+    @staticmethod
+    def _icon_name(machines):
+        """Returns correct icon name, based on the number of running machines. See __update_icon()"""
+        running_count = len([m for m in machines if m.isRunning()])
+        icon_index = min(running_count, 3)
+        return "icon-%d" % icon_index
 
 
     def _show_notification(self, title, message):
