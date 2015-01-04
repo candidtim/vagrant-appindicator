@@ -71,9 +71,18 @@ class VagrantAppIndicator(object):
         """Entry point for appindicator update.
         Triggers all UI modifications necessary on updates of machines states
         Subscribed as a listener to updates of machineindex"""
+        self.__update_icon(machines)
         self.__notify_about_changes(machines)
         self.__update_menu(machines)
         self.last_known_machines = machines
+
+
+    def __update_icon(self, machines):
+        running_count = len([m for m in machines if m.isRunning()])
+        icon_index = min(running_count, 3)
+        icon_name = "icon-%d" % icon_index
+        icon = resource.image_path(icon_name, ui.THEME)
+        self.indicator.set_icon(icon)
 
 
     def _show_notification(self, title, message):
