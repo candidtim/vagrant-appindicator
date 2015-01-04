@@ -15,6 +15,11 @@ Main features:
 Changelog
 =========
 
+1.1.1
+-----
+
+Fixed desktop icon (was: no icon in v1.1.0)
+
 1.1.0
 -----
 
@@ -29,7 +34,7 @@ Initial release.
 Contributing
 ============
 
-See 
+See
 `Vagrant AppIndicator on GitHub <https://github.com/candidtim/vagrant-appindicator>`__
 
 

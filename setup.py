@@ -30,7 +30,7 @@ def find_resources(resource_dir):
 
 
 setup(name="vagrantappindicator",
-      version="1.1.0",
+      version="1.1.1",
       description="Vagrant Application Indicator for Ubuntu",
       url='https://github.com/candidtim/vagrant-appindicator',
       author='candidtim',
