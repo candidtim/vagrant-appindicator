@@ -12,6 +12,19 @@ Main features:
 -  allows bringing VMs up, halting them and destroying them via an
    indicator menu
 
+Changelog
+=========
+
+1.1.0
+-----
+
+Added specific icons when machines are running.
+
+1.0.0
+-----
+
+Initial release.
+
 
 Contributing
 ============

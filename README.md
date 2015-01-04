@@ -14,7 +14,7 @@ Main features:
 
 # Usage
 
-**Install**:
+**Install (or update)**:
 
     $ sudo pip install git+https://github.com/candidtim/vagrant-appindicator.git
 
@@ -98,6 +98,6 @@ See Attributions below.
 
 # Attributions
 
-Main AppIndicator icon was originally distributed under 
+Main AppIndicator is a modified version of the icon originally distributed under
 [CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/). 
 Icon made by Picol from [www.flaticon.com](http://www.flaticon.com)
