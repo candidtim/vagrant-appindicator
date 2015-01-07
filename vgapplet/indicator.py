@@ -61,6 +61,11 @@ class VagrantAppIndicator(object):
         gtk.main()
 
 
+    def open_about_page(self):
+        import webbrowser
+        webbrowser.open('https://github.com/candidtim/vagrant-appindicator/#vagrant-application-indicator-for-ubuntu-unity--gnome')
+
+
     def quit(self):
         self._shutdown()
         notify.uninit()
@@ -134,6 +139,10 @@ class VagrantAppIndicator(object):
         item_show_notifications.connect("activate", self.on_show_notifications)
         menu.append(item_show_notifications)
 
+        item_about = gtk.MenuItem('Help & About')
+        item_about.connect('activate', self.on_about)
+        menu.append(item_about)
+
         item_quit = gtk.MenuItem('Quit')
         item_quit.connect('activate', self.on_quit)
         menu.append(item_quit)
@@ -177,6 +186,7 @@ class VagrantAppIndicator(object):
         return menu_item
 
     # UI listeners
+    def on_about(self, _): self.open_about_page()
     def on_quit(self, _): self.quit()
     def on_open_terminal(self, _, machine): vagrantcontrol.open_terminal(machine)
     def on_start_vm(self, _, machine): vagrantcontrol.start(machine)
