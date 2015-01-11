@@ -13,36 +13,18 @@
 # You should have received a copy of the GNU General Public License along with Foobar.
 # If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import json
+import unittest
+
+from vgapplet import autoupdate
 
 
-__CONFIG_FILE_PATH = os.path.expanduser("~/.vgapplet")
+class TestAppIndicator(unittest.TestCase):
+    def test_get_latest_version(self):
+        # this test assumes that all versions are tagged with tags starting with V
+        version = autoupdate._latest_version()
+        self.assertTrue(type(u'') == type(version))
+        self.assertTrue(version.startswith('v'))
 
 
-show_notifications = True
-check_for_updates = True
-
-
-def __load():
-    if not os.path.isfile(__CONFIG_FILE_PATH): return
-
-    global show_notifications
-    global check_for_updates
-
-    with open(__CONFIG_FILE_PATH, 'r') as config_file:
-        config_dict = json.load(config_file)
-    show_notifications = config_dict.get("show_notifications", True)
-    check_for_updates = config_dict.get("check_for_updates", True)
-
-
-def persist():
-    config_dict = {
-        "show_notifications": show_notifications,
-        "check_for_updates": check_for_updates
-    }
-    with open(__CONFIG_FILE_PATH, 'w') as config_file:
-        json.dump(config_dict, config_file)
-
-
-__load()
+if __name__ == "__main__":
+    unittest.main()

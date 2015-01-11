@@ -28,6 +28,7 @@ from . import ui
 from . import resource
 from . import machineindex
 from . import vagrantcontrol
+from . import autoupdate
 
 
 APPINDICATOR_ID = 'vagrant_appindicator'
@@ -40,6 +41,9 @@ class VagrantAppIndicator(object):
             APPINDICATOR_ID, resource.image_path("icon", ui.THEME), appindicator.IndicatorCategory.SYSTEM_SERVICES)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.last_known_machines = None
+
+        # check for updates
+        self.check_for_updates()
 
         # trigger first update manually, and then subscribe to real updates
         try:
@@ -64,6 +68,13 @@ class VagrantAppIndicator(object):
     def open_about_page(self):
         import webbrowser
         webbrowser.open('https://github.com/candidtim/vagrant-appindicator/#vagrant-application-indicator-for-ubuntu-unity--gnome')
+
+
+    def check_for_updates(self):
+        if config.check_for_updates and autoupdate.is_update_available():
+            self._show_notification("<b>AppIndicator Update</b>",
+                                    "A newer version of Vagrant AppIndicator is available on GitHub. "+\
+                                    "Open 'Help & About' to navigate to the project page.")
 
 
     def quit(self):
@@ -139,6 +150,11 @@ class VagrantAppIndicator(object):
         item_show_notifications.connect("activate", self.on_show_notifications)
         menu.append(item_show_notifications)
 
+        item_check_updates = \
+            gtk.CheckMenuItem("Check for updates", active = config.check_for_updates)
+        item_check_updates.connect("activate", self.on_check_updates)
+        menu.append(item_check_updates)
+
         item_about = gtk.MenuItem('Help & About')
         item_about.connect('activate', self.on_about)
         menu.append(item_about)
@@ -194,6 +210,9 @@ class VagrantAppIndicator(object):
     def on_destroy_vm(self, _, machine): vagrantcontrol.destroy(machine)
     def on_show_notifications(self, _):
         config.show_notifications = not config.show_notifications
+        config.persist()
+    def on_check_updates(self, _):
+        config.check_for_updates = not config.check_for_updates
         config.persist()
 
 

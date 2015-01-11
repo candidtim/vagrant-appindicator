@@ -15,20 +15,26 @@ Main features:
 Changelog
 =========
 
+1.2.0
+-----
+
+- Added "Help & About" menu item
+- Added update check on startup
+
 1.1.1
 -----
 
-Fixed desktop icon (was: no icon in v1.1.0)
+- Fixed desktop icon (was: no icon in v1.1.0)
 
 1.1.0
 -----
 
-Added specific icons when machines are running.
+- Added specific icons when machines are running
 
 1.0.0
 -----
 
-Initial release.
+- Initial release
 
 
 Contributing

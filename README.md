@@ -14,9 +14,16 @@ Main features:
 
 # Usage
 
-**Install (or update)**:
+**Install**:
 
     $ sudo pip install git+https://github.com/candidtim/vagrant-appindicator.git
+
+**Update**
+
+Vagrant AppIndicator will notify you automatically if a newer version is available (provided that there is an access to
+the internet). To update, run again same command as for install.
+
+Update checker can be deactivated in the AppIndicator menu, if necessary.
 
 **Run**
 
