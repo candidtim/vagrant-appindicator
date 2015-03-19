@@ -20,7 +20,7 @@ import subprocess
 
 def open_terminal(machine):
     """Simple opens new terminal window in the working directory of a given machine"""
-    subprocess.Popen(["gnome-terminal"], cwd=machine.directory)
+    subprocess.Popen(["x-terminal-emulator"], cwd=machine.directory)
 
 
 def start(machine):
