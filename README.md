@@ -32,14 +32,14 @@ desktop you use).
 
 **Few more details, if you want**
 
-Install process will install the indicator directly from the source code on GitHub. 
+Install process will install the indicator directly from the source code on GitHub.
 `pip` basically clones the repo and builds and installs everything locally. One can as
 well do all that manually (why though?) - see below if you're interested.
 
-Just in case, you can as well run Vagrant AppIndicator from command line: use `vgapplet` 
+Just in case, you can as well run Vagrant AppIndicator from command line: use `vgapplet`
 or, `nohup vgapplet &`.
 
-To uninstall Vagrant AppIndicator and all files accompanying it, run 
+To uninstall Vagrant AppIndicator and all files accompanying it, run
 `sudo pip uninstall vagrantappindicator`.
 
 
@@ -58,7 +58,7 @@ To uninstall Vagrant AppIndicator and all files accompanying it, run
 
 ## Python 2 and Python 3
 
-Current indicator implementation runs on both Python 2.7 and Python 3. All 
+Current indicator implementation runs on both Python 2.7 and Python 3. All
 tests are as well executed on "both pythons".
 
 ## Running and testing
@@ -89,13 +89,19 @@ tests are as well executed on "both pythons".
 
     $ make clean
 
+**Reminder - release process**
+
+1. Make changes, update and run tests, ensure good coverage
+2. Update setup.py and change the version according to [semantic versioning](http://semver.org/)
+3. Tag new version; tag format is 'vX.Y.Z'; e.g.: v1.2.1
+4. Push changes and a new tag
 
 # Copying
 
 Copyright 2014, [candidtim](https://github.com/candidtim)
 
-This Application Indicator is distributed under 
-[GNU GENERAL PUBLIC LICENSE](http://www.gnu.org/licenses/gpl.html), 
+This Application Indicator is distributed under
+[GNU GENERAL PUBLIC LICENSE](http://www.gnu.org/licenses/gpl.html),
 either version 3 of the License, or (at your option) any later version.
 
 ![GPLv3](http://www.gnu.org/graphics/gplv3-88x31.png)
@@ -106,5 +112,5 @@ See Attributions below.
 # Attributions
 
 Main AppIndicator is a modified version of the icon originally distributed under
-[CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/). 
+[CC BY 3.0 license](http://creativecommons.org/licenses/by/3.0/).
 Icon made by Picol from [www.flaticon.com](http://www.flaticon.com)

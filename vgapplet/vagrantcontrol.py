@@ -15,11 +15,13 @@
 
 
 import os
+import pwd
+import getpass
 import subprocess
 
 
 def open_terminal(machine):
-    """Simple opens new terminal window in the working directory of a given machine"""
+    """Simply opens new terminal window in the working directory of a given machine"""
     subprocess.Popen(["x-terminal-emulator"], cwd=machine.directory)
 
 
@@ -36,7 +38,9 @@ def destroy(machine):
 
 
 def __term(command, cwd):
-    """Starts new terminal, execute given command in it and fall back to bash after its completion"""
-    os.system(
-        "gnome-terminal --working-directory=%s -e \"bash -c '%s; exec bash'\"" % \
-        (os.path.abspath(cwd), command))
+    """Starts new terminal, executes given command in it and falls back to user's default shell after its completion"""
+    subprocess.Popen(['x-terminal-emulator', '-e', 'bash -c "%s; exec %s"' % (command, __user_shell())],
+                     cwd=os.path.abspath(cwd))
+
+def __user_shell():
+    return pwd.getpwnam(getpass.getuser()).pw_shell
