@@ -29,8 +29,16 @@ def start(machine):
     __term("vagrant up %s" % machine.name, machine.directory)
 
 
+def start_and_provision(machine):
+    __term("vagrant up --provision %s" % machine.name, machine.directory)
+
+
 def halt(machine):
     __term("vagrant halt %s" % machine.name, machine.directory)
+
+
+def provision(machine):
+    __term("vagrant provision %s" % machine.name, machine.directory)
 
 
 def destroy(machine):
