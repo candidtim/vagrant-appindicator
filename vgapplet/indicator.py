@@ -177,7 +177,7 @@ class VagrantAppIndicator(object):
         menu_item_image.set_from_file(image_file_path)
         menu_item.set_image(menu_item_image)
         menu_item.set_always_show_image(True)
-        
+
         submenu = gtk.Menu()
         menu_item.set_submenu(submenu)
 
@@ -189,11 +189,19 @@ class VagrantAppIndicator(object):
             submenu_item_up = gtk.MenuItem('Up')
             submenu_item_up.connect('activate', self.on_start_vm, machine)
             submenu.append(submenu_item_up)
-        
+
+            submenu_item_up_and_provision = gtk.MenuItem('Up & Provision')
+            submenu_item_up_and_provision.connect('activate', self.on_start_and_provision, machine)
+            submenu.append(submenu_item_up_and_provision)
+
         if machine.isRunning():
             submenu_item_halt = gtk.MenuItem('Halt')
             submenu_item_halt.connect('activate', self.on_halt_vm, machine)
             submenu.append(submenu_item_halt)
+
+            submenu_item_provision = gtk.MenuItem('Provision')
+            submenu_item_provision.connect('activate', self.on_provision_vm, machine)
+            submenu.append(submenu_item_provision)
 
         submenu_item_destroy = gtk.MenuItem('Destroy')
         submenu_item_destroy.connect('activate', self.on_destroy_vm, machine)
@@ -206,7 +214,9 @@ class VagrantAppIndicator(object):
     def on_quit(self, _): self.quit()
     def on_open_terminal(self, _, machine): vagrantcontrol.open_terminal(machine)
     def on_start_vm(self, _, machine): vagrantcontrol.start(machine)
+    def on_start_and_provision(self, _, machine): vagrantcontrol.start_and_provision(machine)
     def on_halt_vm(self, _, machine): vagrantcontrol.halt(machine)
+    def on_provision_vm(self, _, machine): vagrantcontrol.provision(machine)
     def on_destroy_vm(self, _, machine): vagrantcontrol.destroy(machine)
     def on_show_notifications(self, _):
         config.show_notifications = not config.show_notifications
