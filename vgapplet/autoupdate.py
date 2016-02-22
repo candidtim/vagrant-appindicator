@@ -27,7 +27,9 @@ except ImportError:
 def is_update_available():
     current_version = _current_version()
     latest_version = _latest_version()
-    return current_version is not None and current_version != latest_version
+    return current_version is not None \
+        and latest_version is not None \
+        and current_version != latest_version
 
 
 def _current_version():
@@ -39,8 +41,11 @@ def _current_version():
 
 
 def _latest_version():
-    response = urlopen('https://api.github.com/repos/candidtim/vagrant-appindicator/tags')
-    raw_json = response.read().decode('ascii')
-    tags = json.loads(raw_json)
-    latest_version = [tag['name'] for tag in tags][0]
+    try:
+      response = urlopen('https://api.github.com/repos/candidtim/vagrant-appindicator/tags')
+      raw_json = response.read().decode('ascii')
+      tags = json.loads(raw_json)
+      latest_version = [tag['name'] for tag in tags][0]
+    except:
+      latest_version = None
     return latest_version
