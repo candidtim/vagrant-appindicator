@@ -33,6 +33,18 @@ def start_and_provision(machine):
     __term("vagrant up --provision %s" % machine.name, machine.directory)
 
 
+def resume(machine):
+    __term("vagrant resume %s" % machine.name, machine.directory)
+
+
+def suspend(machine):
+    __term("vagrant suspend %s" % machine.name, machine.directory)
+
+
+def ssh(machine):
+    __term("vagrant ssh %s" % machine.name, machine.directory)
+
+
 def halt(machine):
     __term("vagrant halt %s" % machine.name, machine.directory)
 
