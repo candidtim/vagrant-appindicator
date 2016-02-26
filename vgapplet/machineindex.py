@@ -35,12 +35,15 @@ class Machine(object):
         self.state = state
         self.directory = directory
         self.name = name
-    
+
     def isPoweroff(self):
         return self.state == "poweroff"
 
     def isRunning(self):
         return self.state == "running"
+
+    def isSaved(self):
+        return self.state == "saved"
 
     def __str__(self):
         return "id=%s state=%s directory=%s name=%s" % \
@@ -65,12 +68,12 @@ def get_machineindex():
 
 
 def diff_machineindexes(new_index, old_index):
-        '''Returns tuple of 3 items: 
+        '''Returns tuple of 3 items:
         (list of new machines, list of removed machines, list of machines that changed state)
         '''
         new_machines = [machine for machine in new_index if machine not in old_index]
         removed_machines = [machine for machine in old_index if machine not in new_index]
-        changed_machines = [machine for machine in new_index 
+        changed_machines = [machine for machine in new_index
             if machine in old_index and machine._changed_state_since(old_index[old_index.index(machine)])]
         went_running = [machine for machine in changed_machines if machine.isRunning()]
         return (new_machines, removed_machines, changed_machines)
@@ -112,7 +115,7 @@ def _parse_machineindex(machineindex_file):
     machineindex_json = json.load(machineindex_file)
     version = machineindex_json["version"]
     # currently, only one parser version is available:
-    parser = __MachineIndexParserV1() 
+    parser = __MachineIndexParserV1()
     return parser.parse(machineindex_json)
 
 
@@ -127,7 +130,7 @@ class __MachineIndexParserV1(__MachineIndexParser):
         machines_json = machineindex_json["machines"]
         for machine_id in machines_json:
             machine_json = machines_json[machine_id]
-            machine = Machine(machine_id, machine_json["state"], 
+            machine = Machine(machine_id, machine_json["state"],
                 machine_json["vagrantfile_path"], machine_json["name"])
             machineindex.append(machine)
         return tuple(machineindex)

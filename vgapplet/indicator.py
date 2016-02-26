@@ -185,6 +185,11 @@ class VagrantAppIndicator(object):
         submenu_item_terminal.connect('activate', self.on_open_terminal, machine)
         submenu.append(submenu_item_terminal)
 
+        if machine.isSaved():
+            submenu_item_resume = gtk.MenuItem('Resume')
+            submenu_item_resume.connect('activate', self.on_resume_vm, machine)
+            submenu.append(submenu_item_resume)
+
         if machine.isPoweroff():
             submenu_item_up = gtk.MenuItem('Up')
             submenu_item_up.connect('activate', self.on_start_vm, machine)
@@ -195,6 +200,14 @@ class VagrantAppIndicator(object):
             submenu.append(submenu_item_up_and_provision)
 
         if machine.isRunning():
+            submenu_item_ssh = gtk.MenuItem('SSH')
+            submenu_item_ssh.connect('activate', self.on_ssh_vm, machine)
+            submenu.append(submenu_item_ssh)
+
+            submenu_item_suspend = gtk.MenuItem('Suspend')
+            submenu_item_suspend.connect('activate', self.on_suspend_vm, machine)
+            submenu.append(submenu_item_suspend)
+
             submenu_item_halt = gtk.MenuItem('Halt')
             submenu_item_halt.connect('activate', self.on_halt_vm, machine)
             submenu.append(submenu_item_halt)
@@ -215,6 +228,9 @@ class VagrantAppIndicator(object):
     def on_open_terminal(self, _, machine): vagrantcontrol.open_terminal(machine)
     def on_start_vm(self, _, machine): vagrantcontrol.start(machine)
     def on_start_and_provision(self, _, machine): vagrantcontrol.start_and_provision(machine)
+    def on_resume_vm(self, _, machine): vagrantcontrol.resume(machine)
+    def on_ssh_vm(self, _, machine): vagrantcontrol.ssh(machine)
+    def on_suspend_vm(self, _, machine): vagrantcontrol.suspend(machine)
     def on_halt_vm(self, _, machine): vagrantcontrol.halt(machine)
     def on_provision_vm(self, _, machine): vagrantcontrol.provision(machine)
     def on_destroy_vm(self, _, machine): vagrantcontrol.destroy(machine)
