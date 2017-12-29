@@ -65,7 +65,7 @@ class SampleIndex(object):
 
     def touch(self):
         with open(SAMPLE_INDEX_FILE, 'a') as sample_index:
-            sample_index.write("")
+            sample_index.write("\n")
 
     def __exit__(self, type, value, traceback):
         os.remove(SAMPLE_INDEX_FILE)
